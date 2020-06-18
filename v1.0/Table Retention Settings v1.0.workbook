@@ -218,7 +218,7 @@
                   "type": 2,
                   "description": "Select a workspace from the table above to populate this picker.",
                   "query": "{\"version\":\"ARMEndpoint/1.0\",\"data\":null,\"headers\":[],\"method\":\"GET\",\"path\":\"{ex_ws}/Tables\",\"urlParams\":[{\"key\":\"api-version\",\"value\":\"2017-04-26-preview\"}],\"batchDisabled\":false,\"transformers\":[{\"type\":\"jsonpath\",\"settings\":{\"tablePath\":\"$.value\",\"columns\":[{\"path\":\"$.name\",\"columnid\":\"name\"}]}}]}",
-                  "value": "Usage",
+                  "value": null,
                   "typeSettings": {
                     "additionalResourceOptions": []
                   },
@@ -253,21 +253,15 @@
                       "thresholdsGrid": [
                         {
                           "operator": "==",
-                          "thresholdValue": "30",
-                          "representation": "2",
-                          "text": "{0}{1}"
-                        },
-                        {
-                          "operator": "==",
                           "thresholdValue": "false",
-                          "representation": "Unavailable",
+                          "representation": "Blank",
                           "text": "Global or Table does not exist"
                         },
                         {
                           "operator": "Default",
                           "thresholdValue": null,
-                          "representation": "success",
-                          "text": "{0}{1}"
+                          "representation": "Blank",
+                          "text": "{0}"
                         }
                       ]
                     }
