@@ -1,2 +1,2 @@
-# public-workbooks
+# Azure Monitor Workbooks
  
