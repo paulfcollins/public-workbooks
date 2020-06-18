@@ -1,7 +1,7 @@
 # Azure Monitor Workbooks
  
  
-## Workbooks - how to Import and Export:
+### Workbooks - how to Import and Export:
 
 This is repeated in a file (open the instructions file in *RAW* mode and download to see the screenshots), see instructions in the workbooks folder:
 
@@ -18,6 +18,7 @@ Open Azure Monitor Workbooks
 1. In “advanced edit” mode (press the </> icon) - Choose "Gallery Template" for JSON file or ARM, then press the blue arrow (to the left of the [Apply] button) to download the file
 
 
+## Workbooks ##
 <ul>
   <li><a href=https://github.com/paulfcollins/public-workbooks/tree/master/v1.0>Data Retention settings Workbook</a></li>
 </ul>
