@@ -3,7 +3,7 @@
  
 ### Workbooks - how to Import and Export:
 
-This is repeated in a file (open the instructions file in *RAW* mode and download to see the screenshots), see instructions in the workbooks folder. [Thanks to Clive Watson for the instructions file.]
+This is repeated in a file in the Instructions folder (open the instructions file in *RAW* mode and download to see the screenshots). [Thanks to Clive Watson for the instructions file.]
 
 ### Installation Instructions:
  
