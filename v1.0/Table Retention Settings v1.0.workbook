@@ -64,7 +64,7 @@
                   "resourceType": "microsoft.resourcegraph/resources"
                 }
               ],
-              "style": "pills",
+              "style": "above",
               "queryType": 1,
               "resourceType": "microsoft.resourcegraph/resources"
             },
@@ -191,7 +191,7 @@
                   }
                 }
               ],
-              "style": "pills",
+              "style": "above",
               "queryType": 0
             },
             "customWidth": "20",
@@ -225,7 +225,7 @@
                   "queryType": 12
                 }
               ],
-              "style": "pills",
+              "style": "above",
               "queryType": 12
             },
             "customWidth": "20",
