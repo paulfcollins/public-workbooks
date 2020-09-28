@@ -75,7 +75,7 @@
                   "crossComponentResources": [
                     "{subscription}"
                   ],
-                  "value": "/subscriptions/04a8ebe3-0389-4b0f-8461-30f81896e97e/resourceGroups/OMSWorkspaces-Europe/providers/Microsoft.OperationalInsights/workspaces/pcadmintest",
+                  "value": null,
                   "typeSettings": {
                     "additionalResourceOptions": []
                   },
@@ -200,7 +200,7 @@
               "size": 4,
               "title": "connectionsforMerge",
               "timeContext": {
-                "durationMs": 604800000
+                "durationMs": 0
               },
               "timeContextFromParameter": "timerange",
               "queryType": 0,
@@ -271,7 +271,7 @@
               "showAnalytics": true,
               "title": "Connections by Type",
               "timeContext": {
-                "durationMs": 604800000
+                "durationMs": 0
               },
               "timeContextFromParameter": "timerange",
               "queryType": 0,
