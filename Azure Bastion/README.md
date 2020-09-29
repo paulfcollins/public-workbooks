@@ -6,5 +6,6 @@ Use the _Deploy to Azure_ button to deploy the workbook into a Resource Group.
 
 Below I have included a screenshots of the Workbook:
 
-![Azure Bastion Host List]()
-![Bastion List with Connections]()
+![Azure Bastion Host List](https://github.com/paulfcollins/public-workbooks/blob/master/Azure%20Bastion/images/hostlist.png)
+  
+![Bastion List with Connections](https://github.com/paulfcollins/public-workbooks/blob/master/Azure%20Bastion/images/connections.png)
