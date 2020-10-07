@@ -1,0 +1,660 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "## Azure Bastion Workbook"
+      },
+      "name": "text - 0"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 9,
+            "content": {
+              "version": "KqlParameterItem/1.0",
+              "parameters": [
+                {
+                  "id": "d6b14e6c-4558-4740-a07b-96d6eb14384f",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "subscription",
+                  "type": 6,
+                  "description": "Choose a subscription",
+                  "value": "/subscriptions/04a8ebe3-0389-4b0f-8461-30f81896e97e",
+                  "typeSettings": {
+                    "additionalResourceOptions": [],
+                    "includeAll": false,
+                    "showDefault": false
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "label": "Subscription"
+                },
+                {
+                  "id": "44930d83-2bf9-4956-aed4-0a64144e1c92",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "workspace",
+                  "type": 5,
+                  "description": "Choose a Log Analytics Workspace",
+                  "query": "where type =~ 'microsoft.operationalinsights/workspaces'\r\n| project id, label = name",
+                  "crossComponentResources": [
+                    "{subscription}"
+                  ],
+                  "value": "/subscriptions/04a8ebe3-0389-4b0f-8461-30f81896e97e/resourceGroups/OMSWorkspaces-Europe/providers/Microsoft.OperationalInsights/workspaces/pcadmintest",
+                  "typeSettings": {
+                    "additionalResourceOptions": []
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources",
+                  "label": "Workspace"
+                },
+                {
+                  "id": "55fe1f77-b4e8-434f-ab60-aa89d9aef1f7",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "timerange",
+                  "label": "Time Range",
+                  "type": 4,
+                  "isRequired": true,
+                  "value": {
+                    "durationMs": 86400000
+                  },
+                  "typeSettings": {
+                    "selectableValues": [
+                      {
+                        "durationMs": 300000
+                      },
+                      {
+                        "durationMs": 900000
+                      },
+                      {
+                        "durationMs": 1800000
+                      },
+                      {
+                        "durationMs": 3600000
+                      },
+                      {
+                        "durationMs": 14400000
+                      },
+                      {
+                        "durationMs": 43200000
+                      },
+                      {
+                        "durationMs": 86400000
+                      },
+                      {
+                        "durationMs": 172800000
+                      },
+                      {
+                        "durationMs": 259200000
+                      },
+                      {
+                        "durationMs": 604800000
+                      },
+                      {
+                        "durationMs": 1209600000
+                      },
+                      {
+                        "durationMs": 2419200000
+                      },
+                      {
+                        "durationMs": 2592000000
+                      },
+                      {
+                        "durationMs": 5184000000
+                      },
+                      {
+                        "durationMs": 7776000000
+                      }
+                    ]
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  }
+                },
+                {
+                  "id": "61c01b6c-c562-43de-8acf-92391ea828a8",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "Help",
+                  "type": 10,
+                  "isRequired": true,
+                  "typeSettings": {
+                    "additionalResourceOptions": [],
+                    "showDefault": false
+                  },
+                  "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\"},\r\n {\"value\": \"No\", \"label\": \"No\", \"selected\":true },\r\n {\"value\": \"Change Log\", \"label\": \"Change Log\"}\r\n]"
+                }
+              ],
+              "style": "above",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces"
+            },
+            "name": "parameters - 0"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "## Help File\r\n\r\nBastion Host Summary tab: The view here uses data from Azure Resource Graph (ARG)  \r\nConnections tab: The views on this tab utilise data from the following Azure Monitor (Log Analytics) Tables:\r\n* AzureBastionAuditLogs\r\n* AzureActivity\r\n\r\nYou will not see any information unless you have enabled the Diagnostic Settings for the Azure Bastion Hosts. To enable Diagnostic Settings, please refer to the [following documentation](https://docs.microsoft.com/en-us/azure/bastion/diagnostic-logs#enable)."
+            },
+            "conditionalVisibility": {
+              "parameterName": "Help",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "name": "helptext"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "## Change Log \r\n\r\n__06 October__  \r\nChange Log Parameter added  \r\nRemoved Duration Time filter (50000ms)  \r\nRemoved query using Duration Time filter (exported the workbook)  \r\nAdded _Bastion Connections by Caller_ query\r\n"
+            },
+            "conditionalVisibility": {
+              "parameterName": "Help",
+              "comparison": "isEqualTo",
+              "value": "Change Log"
+            },
+            "name": "text - 18"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "## Spacer"
+            },
+            "conditionalVisibility": {
+              "parameterName": "_",
+              "comparison": "isNotEqualTo"
+            },
+            "name": "text - 6 - Copy"
+          },
+          {
+            "type": 11,
+            "content": {
+              "version": "LinkItem/1.0",
+              "style": "tabs",
+              "links": [
+                {
+                  "id": "75e3c3a4-06ac-4285-b060-15e24c4f0a31",
+                  "cellValue": "selectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Bastion Host Summary",
+                  "subTarget": "Hosts",
+                  "preText": "Hosts",
+                  "style": "link"
+                },
+                {
+                  "id": "ce07bfee-3c54-41aa-bc89-f8de8cc73c74",
+                  "cellValue": "selectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Connections",
+                  "subTarget": "Connections",
+                  "preText": "Connections",
+                  "style": "link"
+                }
+              ]
+            },
+            "name": "links - 9"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources\r\n| where type == \"microsoft.network/bastionhosts\"\r\n| parse properties.ipConfigurations[0].properties.subnet with * 'virtualNetworks/' bastionvnet '/' dumpdata\r\n| project ['Bastion id']=id, ['Bastion Name']=name, ['Azure Region']=location, ['Resource Group']=resourceGroup, ['Virtual Network']=bastionvnet, ['Tags']=tags, ['Raw Data']=properties",
+              "size": 1,
+              "showExportToExcel": true,
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{subscription}"
+              ],
+              "gridSettings": {
+                "filter": true
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Hosts"
+            },
+            "name": "query - 3"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "### Queries below used to collect data for the merge query"
+            },
+            "conditionalVisibility": {
+              "parameterName": "_",
+              "comparison": "isNotEqualTo"
+            },
+            "name": "text - 6"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "MicrosoftAzureBastionAuditLogs\r\n| summarize count() by _ResourceId, UserName, Protocol, TargetVMIPAddress",
+              "size": 4,
+              "title": "connectionsforMerge",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "timeContextFromParameter": "timerange",
+              "exportFieldName": "_ResourceId",
+              "exportParameterName": "bastionid",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "crossComponentResources": [
+                "{workspace}"
+              ]
+            },
+            "customWidth": "50",
+            "conditionalVisibility": {
+              "parameterName": "_",
+              "comparison": "isNotEqualTo"
+            },
+            "name": "query - connectionsbyuser",
+            "styleSettings": {
+              "maxWidth": "50"
+            }
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "Resources\r\n| where type =~ 'microsoft.compute/virtualmachines'\r\n| extend nics=array_length(properties.networkProfile.networkInterfaces) \r\n| mv-expand nic=properties.networkProfile.networkInterfaces \r\n| where nics == 1 or nic.properties.primary =~ 'true' or isempty(nic) \r\n| project vmId = id, vmName = name, nicId = tostring(nic.id)\r\n| join kind=leftouter (\r\n\tResources\r\n    | where type =~ 'microsoft.network/networkinterfaces'\r\n    | extend ipConfigsCount=array_length(properties.ipConfigurations) \r\n    | mv-expand ipconfig=properties.ipConfigurations \r\n    | where ipConfigsCount == 1 or ipconfig.properties.primary =~ 'true'\r\n    | project nicId = id, privateIp = tostring(ipconfig.properties.privateIPAddress))\r\non nicId\r\n| project vmId, vmName, privateIp",
+              "size": 4,
+              "title": "vmIpforMerge",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{subscription}"
+              ]
+            },
+            "customWidth": "50",
+            "conditionalVisibility": {
+              "parameterName": "_",
+              "comparison": "isNotEqualTo"
+            },
+            "name": "query - vmIp",
+            "styleSettings": {
+              "maxWidth": "50"
+            }
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "Please select a workspace using the dropdown above.",
+              "style": "info"
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              },
+              {
+                "parameterName": "workspace",
+                "comparison": "isEqualTo"
+              }
+            ],
+            "name": "text - 16"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"Merge/1.0\",\"merges\":[{\"id\":\"4c879044-fa4e-4aaf-8262-16a9dd86a126\",\"mergeType\":\"innerunique\",\"leftTable\":\"query - connectionsbyuser\",\"rightTable\":\"query - vmIp\",\"leftColumn\":\"TargetVMIPAddress\",\"rightColumn\":\"privateIp\"}],\"projectRename\":[{\"originalName\":\"[query - vmIp].vmId\",\"mergedName\":\"Virtual Machine\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - connectionsbyuser]._ResourceId\",\"mergedName\":\"Bastion Used\",\"fromId\":\"4c879044-fa4e-4aaf-8262-16a9dd86a126\"},{\"originalName\":\"[query - connectionsbyuser].UserName\",\"mergedName\":\"UserName\",\"fromId\":\"4c879044-fa4e-4aaf-8262-16a9dd86a126\"},{\"originalName\":\"[query - connectionsbyuser].Protocol\",\"mergedName\":\"Protocol\",\"fromId\":\"4c879044-fa4e-4aaf-8262-16a9dd86a126\"},{\"originalName\":\"[query - connectionsbyuser].TargetVMIPAddress\",\"mergedName\":\"VM IP Address\",\"fromId\":\"4c879044-fa4e-4aaf-8262-16a9dd86a126\"},{\"originalName\":\"[query - connectionsbyuser].count_\",\"mergedName\":\"Connection Count\",\"fromId\":\"4c879044-fa4e-4aaf-8262-16a9dd86a126\"},{\"originalName\":\"[query - vmIp].privateIp\"},{\"originalName\":\"[query - vmIp].vmName\"}]}",
+              "size": 0,
+              "title": "Connections by Virtual Machine",
+              "showExportToExcel": true,
+              "queryType": 7,
+              "gridSettings": {
+                "filter": true
+              }
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "workspace",
+                "comparison": "isNotEqualTo"
+              },
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              }
+            ],
+            "showPin": false,
+            "name": "merge - connections"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "MicrosoftAzureBastionAuditLogs\r\n| parse OperationName with * 'BastionHost/' ConnectionType\r\n| summarize count() by ConnectionType, _ResourceId, bin(TimeGenerated, {timerange:grain})\r\n| order by TimeGenerated",
+              "size": 0,
+              "showAnalytics": true,
+              "title": "Connections by Type over Time (Time Brush)",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "timeContextFromParameter": "timerange",
+              "timeBrushParameterName": "tbCountbyConnection",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "crossComponentResources": [
+                "{workspace}"
+              ],
+              "visualization": "unstackedbar",
+              "tileSettings": {
+                "showBorder": false,
+                "titleContent": {
+                  "columnMatch": "OperationName",
+                  "formatter": 1
+                },
+                "leftContent": {
+                  "columnMatch": "count_",
+                  "formatter": 12,
+                  "formatOptions": {
+                    "palette": "auto"
+                  },
+                  "numberFormat": {
+                    "unit": 17,
+                    "options": {
+                      "maximumSignificantDigits": 3,
+                      "maximumFractionDigits": 2
+                    }
+                  }
+                }
+              }
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "workspace",
+                "comparison": "isNotEqualTo",
+                "value": ""
+              },
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              }
+            ],
+            "name": "query - countbyconnection"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "MicrosoftAzureBastionAuditLogs\r\n| parse OperationName with * 'BastionHost/' ConnectionType\r\n| summarize count() by ConnectionType, _ResourceId, bin(TimeGenerated, {timerange:grain})\r\n| order by TimeGenerated\r\n// maybe add other data for this details view",
+              "size": 0,
+              "title": "Details - Connections by Time Slice {tbCountbyConnection:label}",
+              "timeContext": {
+                "durationMs": 0
+              },
+              "timeContextFromParameter": "tbCountbyConnection",
+              "timeBrushParameterName": "tbCountbyConnection",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "crossComponentResources": [
+                "{workspace}"
+              ],
+              "visualization": "table",
+              "tileSettings": {
+                "showBorder": false,
+                "titleContent": {
+                  "columnMatch": "OperationName",
+                  "formatter": 1
+                },
+                "leftContent": {
+                  "columnMatch": "count_",
+                  "formatter": 12,
+                  "formatOptions": {
+                    "palette": "auto"
+                  },
+                  "numberFormat": {
+                    "unit": 17,
+                    "options": {
+                      "maximumSignificantDigits": 3,
+                      "maximumFractionDigits": 2
+                    }
+                  }
+                }
+              }
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "workspace",
+                "comparison": "isNotEqualTo",
+                "value": ""
+              },
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              }
+            ],
+            "name": "query - countbyconnection - Copy"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "AzureActivity \r\n| where OperationNameValue == \"MICROSOFT.NETWORK/BASTIONHOSTS/GETACTIVESESSIONS/ACTION\" and ActivitySubstatusValue == \"Accepted\"\r\n| project TimeGenerated, _ResourceId, Caller, CallerIpAddress\r\n| join \r\n(\r\nMicrosoftAzureBastionAuditLogs\r\n| where Message == \"Successfully Disconnected\"\r\n)\r\non $left.CallerIpAddress == $right.ClientIpAddress\r\n| extend SessionTimeMins=datetime_diff('minute',todatetime(SessionEndTime),SessionStartTime)\r\n| project Caller, _ResourceId, ClientIpAddress, TargetVMIPAddress, Protocol, SessionStartTime, SessionEndTime, SessionTimeMins",
+              "size": 0,
+              "showAnalytics": true,
+              "title": "Bastion Connections by Caller",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "timeContextFromParameter": "timerange",
+              "showExportToExcel": true,
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "crossComponentResources": [
+                "{workspace}"
+              ],
+              "gridSettings": {
+                "filter": true,
+                "labelSettings": [
+                  {
+                    "columnId": "_ResourceId",
+                    "label": "Bastion Used"
+                  },
+                  {
+                    "columnId": "ClientIpAddress",
+                    "label": "Source IP Address"
+                  },
+                  {
+                    "columnId": "TargetVMIPAddress",
+                    "label": "Target VM IP Address"
+                  },
+                  {
+                    "columnId": "SessionTimeMins",
+                    "label": "Duration (Mins)"
+                  }
+                ]
+              }
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              },
+              {
+                "parameterName": "workspace",
+                "comparison": "isNotEqualTo"
+              }
+            ],
+            "name": "query - 8"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "AzureActivity \r\n| where OperationNameValue == \"MICROSOFT.NETWORK/BASTIONHOSTS/GETACTIVESESSIONS/ACTION\" and ActivitySubstatusValue == \"Accepted\"\r\n| project TimeGenerated, _ResourceId, Caller\r\n| join kind=leftouter (\r\n    MicrosoftAzureBastionAuditLogs\r\n    | where Message == \"Successfully Connected.\"\r\n    | summarize count() by _ResourceId, TimeGenerated, UserName, Protocol, TargetVMIPAddress, ClientIpAddress)\r\non _ResourceId\r\n//| summarize count(), make_set(Caller), dcount(Caller) by _ResourceId, ClientIpAddress, UserName, Protocol, ['Target VM IP']=TargetVMIPAddress, TimeGenerated\r\n| summarize count(), dcount(Caller) by _ResourceId, ClientIpAddress, UserName, Protocol, ['Target VM IP']=TargetVMIPAddress, TimeGenerated",
+              "size": 0,
+              "aggregation": 5,
+              "showAnalytics": true,
+              "title": "Bastion Connection by Callers",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "timeContextFromParameter": "timerange",
+              "timeBrushParameterName": "tbSuccessfulConnection",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "crossComponentResources": [
+                "{workspace}"
+              ],
+              "visualization": "timechart",
+              "chartSettings": {
+                "seriesLabelSettings": [
+                  {
+                    "seriesName": "count_",
+                    "label": "Successful Connection Count"
+                  },
+                  {
+                    "seriesName": "dcount_Caller",
+                    "label": "Unique User Count"
+                  }
+                ],
+                "ySettings": {
+                  "numberFormatSettings": {
+                    "unit": 17,
+                    "options": {
+                      "style": "decimal",
+                      "useGrouping": true
+                    }
+                  }
+                }
+              }
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              },
+              {
+                "parameterName": "workspace",
+                "comparison": "isNotEqualTo"
+              }
+            ],
+            "name": "query-azureactivitycaller - Copy"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "AzureActivity \r\n| where OperationNameValue == \"MICROSOFT.NETWORK/BASTIONHOSTS/GETACTIVESESSIONS/ACTION\" and ActivitySubstatusValue == \"Accepted\"\r\n| project TimeGenerated, _ResourceId, Caller\r\n| join kind=leftouter (\r\n    MicrosoftAzureBastionAuditLogs\r\n    | where Message == \"Successfully Connected.\"\r\n    | summarize count() by _ResourceId, TimeGenerated, UserName, Protocol, TargetVMIPAddress, ClientIpAddress)\r\non _ResourceId\r\n//| project _ResourceId, ['Connection Initiated by']=Caller, ClientIpAddress, UserName, Protocol, ['Target VM IP']=TargetVMIPAddress, Count=count_\r\n//| summarize count() by ['Connection Initiated by']=Caller, _ResourceId, ClientIpAddress, UserName, Protocol, ['Target VM IP']=TargetVMIPAddress //, Count=count_\r\n| summarize count(), make_set(Caller), dcount(Caller) by _ResourceId, ClientIpAddress, UserName, Protocol, ['Target VM IP']=TargetVMIPAddress",
+              "size": 0,
+              "showAnalytics": true,
+              "title": "Bastion Connection by Caller {tbSuccessfulConnection:label}",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "timeContextFromParameter": "timerange",
+              "showExportToExcel": true,
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "crossComponentResources": [
+                "{workspace}"
+              ],
+              "gridSettings": {
+                "filter": true,
+                "labelSettings": [
+                  {
+                    "columnId": "_ResourceId",
+                    "label": "Bastion Host"
+                  },
+                  {
+                    "columnId": "ClientIpAddress",
+                    "label": "Source IP Address"
+                  },
+                  {
+                    "columnId": "UserName",
+                    "label": "VM Username"
+                  },
+                  {
+                    "columnId": "Protocol"
+                  },
+                  {
+                    "columnId": "Target VM IP"
+                  },
+                  {
+                    "columnId": "count_"
+                  },
+                  {
+                    "columnId": "set_Caller",
+                    "label": "Connection Initiator(s)"
+                  },
+                  {
+                    "columnId": "dcount_Caller",
+                    "label": "Initiator Count"
+                  }
+                ]
+              }
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              },
+              {
+                "parameterName": "workspace",
+                "comparison": "isNotEqualTo"
+              }
+            ],
+            "name": "query-azureactivitycaller"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "AzureActivity \r\n| where OperationNameValue == \"MICROSOFT.NETWORK/BASTIONHOSTS/GETACTIVESESSIONS/ACTION\" and ActivitySubstatusValue == \"Accepted\"\r\n| project TimeGenerated, _ResourceId, Caller, CallerIpAddress\r\n| join \r\n(\r\n MicrosoftAzureBastionAuditLogs\r\n | where Message == \"Successfully Connected.\"\r\n )\r\non $left.CallerIpAddress == $right.ClientIpAddress\r\n//| order by TimeGenerated desc\r\n| project TimeGenerated, _ResourceId, Caller, ClientIpAddress, UserName, TargetVMIPAddress, Protocol\r\n| summarize count() by Caller, ClientIpAddress, UserName, Protocol, ['Target VM IP']=TargetVMIPAddress, TimeGenerated",
+              "size": 0,
+              "title": "Bastion Connections by User",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "timeContextFromParameter": "timerange",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "crossComponentResources": [
+                "{workspace}"
+              ],
+              "visualization": "linechart"
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "Connections"
+              },
+              {
+                "parameterName": "workspace",
+                "comparison": "isNotEqualTo"
+              }
+            ],
+            "name": "query - 15"
+          }
+        ]
+      },
+      "name": "group - 1"
+    }
+  ],
+  "fallbackResourceIds": [
+    "Azure Monitor"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
